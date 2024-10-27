@@ -1,0 +1,33 @@
+// Troy Kaufman
+// tkaufman@g.hmc.edu
+// 10/16/24
+// This module creates a key every round 
+
+module shift_rows(input logic [127:0] state,
+                  output logic [127:0] new_state);
+
+    // The 0th row remains unchanged
+    assign [127:120] new_state = [127:120] state;
+    assign [95:88] new_state = [95:88] state;
+    assign [63:56] new_state = [63:56] state;
+    assign [31:24] new_state = [31:24] state;
+
+    // The 1st row will be shifted to the left once
+    assign [119:112] new_state = [87:80] state;
+    assign [87:80] new_state = [55:48] state;
+    assign [55:48] new_state = [23:16] state;
+    assign [23:16] new_state = [119:112] state;
+
+    // The 2nd row will be shifted to the left twice
+    assign [111:104] new_state = [47:40] state;
+    assign [79:72] new_state = [15:8] state;
+    assign [47:40] new_state = [111:104] state;
+    assign [15:8] new_state = [79:72] state;
+
+    // The 3rd row will be shifted to the left three times
+    assign [103:96] new_state = [7:0] state;
+    assign [71:64] new_state = [103:96] state;
+    assign [39:32] new_state = [71:64] state;
+    assign [7:0] new_state = [39:32] state;
+
+endmodule
