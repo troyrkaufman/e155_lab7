@@ -7,7 +7,7 @@ module shift_rows(input logic [127:0] state,
                   output logic [127:0] new_state);
 
     // The 0th row remains unchanged
-    assign [127:120] new_state =  [127:120] state;
+    assign new_state [127:120] =  state [127:120];
     assign [95:88] new_state = [95:88] state;
     assign [63:56] new_state = [63:56] state;
     assign [31:24] new_state = [31:24] state;

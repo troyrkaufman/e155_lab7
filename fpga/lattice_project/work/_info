@@ -1,0 +1,138 @@
+m255
+K4
+z2
+!s11f vlog 2021.4 2021.10, Oct 14 2021
+13
+!s112 1.1
+!i10d 8192
+!i10e 25
+!i10f 100
+cModel Technology
+dC:/lscc/radiant/3.2/modeltech/win32loem
+vadd_round_key
+Z0 DXx6 sv_std 3 std 0 22 VYECXdT12H8WgbUP_5Y6:3
+Z1 !s110 1730085281
+!i10b 1
+!s100 KaFV5^6zVTOhfe7BT@iKm1
+I4In5b982S`AVSgjHY`Y0S2
+S1
+Z2 dC:/Users/tkaufman/lab7/e155_lab7/fpga/lattice_project
+w1730084877
+8C:/Users/tkaufman/lab7/e155_lab7/fpga/src/add_round_key.sv
+FC:/Users/tkaufman/lab7/e155_lab7/fpga/src/add_round_key.sv
+!i122 9
+Z3 L0 6 6
+Z4 VDg1SIo80bB@j0V0VzS_@n1
+Z5 OT;L;2021.4;73
+r1
+!s85 0
+31
+Z6 !s108 1730085281.000000
+!s107 C:/Users/tkaufman/lab7/e155_lab7/fpga/src/add_round_key.sv|
+!s90 -reportprogress|300|-work|work|-sv|-stats=none|C:/Users/tkaufman/lab7/e155_lab7/fpga/src/add_round_key.sv|
+!s101 -O0
+!i113 1
+Z7 o-work work -sv -O0
+Z8 tCvgOpt 0
+vmixcolumn
+R0
+R1
+!i10b 1
+!s100 eL^5ZhIblGikW[d@F3MDa0
+I=?YMWzSZA2[`2OOcWT_aD2
+S1
+R2
+Z9 w1730084603
+8C:/Users/tkaufman/lab7/e155_lab7/fpga/src/mix_column.sv
+FC:/Users/tkaufman/lab7/e155_lab7/fpga/src/mix_column.sv
+!i122 10
+L0 8 19
+R4
+R5
+r1
+!s85 0
+31
+R6
+!s107 C:/Users/tkaufman/lab7/e155_lab7/fpga/src/mix_column.sv|
+!s90 -reportprogress|300|-work|work|-sv|-stats=none|C:/Users/tkaufman/lab7/e155_lab7/fpga/src/mix_column.sv|
+!s101 -O0
+!i113 1
+R7
+R8
+vmixcolumns
+R0
+!s125 LATTICE_CONN
+R1
+!i10b 1
+!s100 8ocjmI>GhFSE^5Ob1`3B]0
+IZ36FclL20TiKa47XeG6@E2
+S1
+R2
+R9
+8C:/Users/tkaufman/lab7/e155_lab7/fpga/src/mix_columns.sv
+FC:/Users/tkaufman/lab7/e155_lab7/fpga/src/mix_columns.sv
+!i122 11
+L0 8 8
+R4
+R5
+r1
+!s85 0
+31
+R6
+!s107 C:/Users/tkaufman/lab7/e155_lab7/fpga/src/mix_columns.sv|
+!s90 -reportprogress|300|-work|work|-sv|-stats=none|C:/Users/tkaufman/lab7/e155_lab7/fpga/src/mix_columns.sv|
+!s101 -O0
+!i113 1
+R7
+R8
+vrot_Word
+R0
+R1
+!i10b 1
+!s100 0X@Uf:?=?5jHEVfi7Rm643
+I1YRB<>H9UHj;]lH]>d2`J3
+S1
+R2
+R9
+8C:/Users/tkaufman/lab7/e155_lab7/fpga/src/rot_word.sv
+FC:/Users/tkaufman/lab7/e155_lab7/fpga/src/rot_word.sv
+!i122 12
+R3
+R4
+R5
+r1
+!s85 0
+31
+R6
+!s107 C:/Users/tkaufman/lab7/e155_lab7/fpga/src/rot_word.sv|
+!s90 -reportprogress|300|-work|work|-sv|-stats=none|C:/Users/tkaufman/lab7/e155_lab7/fpga/src/rot_word.sv|
+!s101 -O0
+!i113 1
+R7
+R8
+nrot_@word
+vsbox_sync
+R0
+R1
+!i10b 1
+!s100 `RFMS[1?7Ug_3B;fZ6K8:3
+I5bQUzWjdoM`S9c1jekBBT2
+S1
+R2
+R9
+8C:/Users/tkaufman/lab7/e155_lab7/fpga/src/sbox_sync.sv
+FC:/Users/tkaufman/lab7/e155_lab7/fpga/src/sbox_sync.sv
+!i122 13
+L0 7 16
+R4
+R5
+r1
+!s85 0
+31
+R6
+!s107 C:/Users/tkaufman/lab7/e155_lab7/fpga/src/sbox_sync.sv|
+!s90 -reportprogress|300|-work|work|-sv|-stats=none|C:/Users/tkaufman/lab7/e155_lab7/fpga/src/sbox_sync.sv|
+!s101 -O0
+!i113 1
+R7
+R8

@@ -6,7 +6,7 @@
 module add_round_key(input logic [127:0] state, round_key,
                      output logic [127:0] new_state);
 
-    assign new_state = state ^ round_key;
+    assign new_state = state ^ key;
 
 endmodule
 
