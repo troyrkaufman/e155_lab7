@@ -2,9 +2,9 @@
 // tkaufman@g.hmc.edu
 // 10/16/24
 // This module updates the state with every bytes' corresponding sbox value
+// Make sure that a DFFE is present for this combinational logic
 
-module sub_bytes(input logic clk, 
-                 input logic [127:0] state,
+module sub_bytes(input logic [127:0] state,
                  output logic [127:0] new_state);
 
     logic [7:0] x0, x1, x2, x3, x4, x5, x6, x7, x8, x9, x10, x11, x12, x13, x14, x15;
