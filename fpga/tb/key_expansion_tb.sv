@@ -46,8 +46,8 @@ module key_expansion_tb();
 	round = 9;
 	prev_key = 128'head27321b58dbad2312bf5607f8d292f; #850;
 
-	//round = 2;
-	//prev_key = 128'ha0fafe1788542cb123a339392a6c7605; #850;
+	round = 10;
+	prev_key = 128'hac7766f319fadc2128d12941575c006e; #850;
 
     end
 endmodule
