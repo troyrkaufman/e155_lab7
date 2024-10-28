@@ -5,7 +5,7 @@
 // Make sure that a DFFE is present for this combinational logic
 
 module sub_bytes(input logic clk, //en,
-		 input logic [127:0] state,
+		         input logic [127:0] state,
                  output logic [127:0] new_state);
 
     logic [7:0] y0, y1, y2, y3, y4, y5, y6, y7, y8, y9, y10, y11, y12, y13, y14, y15;

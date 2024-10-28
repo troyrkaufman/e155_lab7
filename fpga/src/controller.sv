@@ -3,6 +3,10 @@
 // 10/27/24
 // This module controls the flow of data throughout the AES implementation. 
 
+/*
+    FSM: 
+*/
+
 module controller(input logic clk, nrst,
                   input logic [127:0] current_key,
                   output logic input_data_mux, 

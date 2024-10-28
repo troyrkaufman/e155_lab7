@@ -2,7 +2,8 @@
 // tkaufman@g.hmc.edu
 // 10/16/24
 // This module creates a key every round 
-module key_expansion(input logic [3:0] round,          // round reset will be handled in controller module
+module key_expansion(input logic clk,
+                     input logic [3:0] round,          // round reset will be handled in controller module
                      input logic [127:0] key,          // Will need to be updated by 
                      input logic [127:0] prev_key,     // stored in controller module
                      output logic [127:0] round_key);
