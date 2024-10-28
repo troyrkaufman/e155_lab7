@@ -7,27 +7,27 @@ module shift_rows(input logic [127:0] state,
                   output logic [127:0] new_state);
 
     // The 0th row remains unchanged
-    assign [127:120] new_state =  [127:120] state;
-    assign [95:88] new_state = [95:88] state;
-    assign [63:56] new_state = [63:56] state;
-    assign [31:24] new_state = [31:24] state;
+    assign new_state[127:120] =  state[127:120] ;
+    assign new_state[95:88] = state[95:88];
+    assign new_state[63:56] = state[63:56];
+    assign new_state[31:24] = state[31:24];
 
     // The 1st row will be shifted to the left once
-    assign [119:112] new_state = [87:80] state;
-    assign [87:80] new_state = [55:48] state;
-    assign [55:48] new_state = [23:16] state;
-    assign [23:16] new_state = [119:112] state;
+    assign new_state[119:112] = state[87:80];
+    assign new_state[87:80] = state[55:48];
+    assign new_state[55:48] = state[23:16];
+    assign new_state[23:16] = state[119:112];
 
     // The 2nd row will be shifted to the left twice
-    assign [111:104] new_state = [47:40] state;
-    assign [79:72] new_state = [15:8] state;
-    assign [47:40] new_state = [111:104] state;
-    assign [15:8] new_state = [79:72] state;
+    assign new_state[111:104] = state[47:40];
+    assign new_state[79:72] = state[15:8];
+    assign new_state[47:40] = state[111:104];
+    assign new_state[15:8] = state[79:72];
 
     // The 3rd row will be shifted to the left three times
-    assign [103:96] new_state = [7:0] state;
-    assign [71:64] new_state = [103:96] state;
-    assign [39:32] new_state = [71:64] state;
-    assign [7:0] new_state = [39:32] state;
+    assign new_state[103:96] = state[7:0];
+    assign new_state[71:64] = state[103:96];
+    assign new_state[39:32] = state[71:64];
+    assign new_state[7:0] = state[39:32];
 
 endmodule
