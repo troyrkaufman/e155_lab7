@@ -19,7 +19,7 @@ module key_expansion(input logic [3:0] round,          // round reset will be ha
     rot_word r2(prev_key[63:56], prev_key[55:48], prev_key[47:40], prev_key[39:32], rot_word2);
     rot_word r3(prev_key[31:24], prev_key[23:16], prev_key[15:8], prev_key[7:0], rot_word3);
 
-    // Perform SubWord on four bytes at a time
+    // Perform SubWord on the 4 words
     sub_bytes s0({rot_word0, rot_word1, rot_word2, rot_word3}, changed_key);
 
     // Find previous word relationships
@@ -31,83 +31,97 @@ module key_expansion(input logic [3:0] round,          // round reset will be ha
     // Calculate round constant
     always_comb
         begin
-            if (round <= 4d8){
+            if (round <= 4'd8)
                 rcon = (32'h01000000 << round);
-            } else if (count == 4d9) {
+              else if (round == 4'd9) 
                 rcon = 32'h1b000000;
-            } else if (count == 4d10){
+              else if (round == 4'd10)
                 rcon = 32'h36000000;
-            }
         end
     
     always_comb 
         begin 
             // The first 4 words of the expanded key are the key itself
-            if (round == 4'd0) {
+            if (round == 4'd0) 
                 round_key = key;
-            } else if (round == 4'd1) {
+             else if (round == 4'd1) begin
                 cur_word0 = prev_word3 ^ prev_word0 ^ rcon;
                 cur_word1 = cur_word0 ^ prev_word1;
                 cur_word2 = cur_word1 ^ prev_word2;
                 cur_word3 = cur_word2 ^ prev_word3;
                 round_key = {cur_word0, cur_word1, cur_word2, cur_word3};
-            } else if (round == 4'd2) {
+		end
+             else if (round == 4'd2) begin
                 cur_word0 = prev_word3 ^ prev_word0 ^ rcon;
                 cur_word1 = cur_word0 ^ prev_word1;
                 cur_word2 = cur_word1 ^ prev_word2;
                 cur_word3 = cur_word2 ^ prev_word3;
                 round_key = {cur_word0, cur_word1, cur_word2, cur_word3};
-            } else if (round == 4'd3) {
+		end
+             else if (round == 4'd3) begin
                 cur_word0 = prev_word3 ^ prev_word0 ^ rcon;
                 cur_word1 = cur_word0 ^ prev_word1;
                 cur_word2 = cur_word1 ^ prev_word2;
                 cur_word3 = cur_word2 ^ prev_word3;
                 round_key = {cur_word0, cur_word1, cur_word2, cur_word3};
-            } else if (round == 4'd4) {
+		end
+             else if (round == 4'd4) begin
                 cur_word0 = prev_word3 ^ prev_word0 ^ rcon;
                 cur_word1 = cur_word0 ^ prev_word1;
                 cur_word2 = cur_word1 ^ prev_word2;
                 cur_word3 = cur_word2 ^ prev_word3;
                 round_key = {cur_word0, cur_word1, cur_word2, cur_word3};
-            } else if (round == 4'd5) {
+		end
+             else if (round == 4'd5) begin
                 cur_word0 = prev_word3 ^ prev_word0 ^ rcon;
                 cur_word1 = cur_word0 ^ prev_word1;
                 cur_word2 = cur_word1 ^ prev_word2;
                 cur_word3 = cur_word2 ^ prev_word3;
                 round_key = {cur_word0, cur_word1, cur_word2, cur_word3};
-            } else if (round == 4'd6) {
+		end
+             else if (round == 4'd6) begin
                 cur_word0 = prev_word3 ^ prev_word0 ^ rcon;
                 cur_word1 = cur_word0 ^ prev_word1;
                 cur_word2 = cur_word1 ^ prev_word2;
                 cur_word3 = cur_word2 ^ prev_word3;
                 round_key = {cur_word0, cur_word1, cur_word2, cur_word3};
-            } else if (round == 4'd7) {
+		end
+             else if (round == 4'd7) begin
                 cur_word0 = prev_word3 ^ prev_word0 ^ rcon;
                 cur_word1 = cur_word0 ^ prev_word1;
                 cur_word2 = cur_word1 ^ prev_word2;
                 cur_word3 = cur_word2 ^ prev_word3;
                 round_key = {cur_word0, cur_word1, cur_word2, cur_word3};
-            } else if (round == 4'd8) {
+		end
+             else if (round == 4'd8) begin
                 cur_word0 = prev_word3 ^ prev_word0 ^ rcon;
                 cur_word1 = cur_word0 ^ prev_word1;
                 cur_word2 = cur_word1 ^ prev_word2;
                 cur_word3 = cur_word2 ^ prev_word3;
                 round_key = {cur_word0, cur_word1, cur_word2, cur_word3};
-            } else if (round == 4'd9) {
+		end
+             else if (round == 4'd9) begin
                 cur_word0 = prev_word3 ^ prev_word0 ^ rcon;
                 cur_word1 = cur_word0 ^ prev_word1;
                 cur_word2 = cur_word1 ^ prev_word2;
                 cur_word3 = cur_word2 ^ prev_word3;
                 round_key = {cur_word0, cur_word1, cur_word2, cur_word3};
-            } else if (round == 4'd10) {
+		end
+             else if (round == 4'd10) begin
                 cur_word0 = prev_word3 ^ prev_word0 ^ rcon;
                 cur_word1 = cur_word0 ^ prev_word1;
                 cur_word2 = cur_word1 ^ prev_word2;
                 cur_word3 = cur_word2 ^ prev_word3;
                 round_key = {cur_word0, cur_word1, cur_word2, cur_word3};
-            } else {
-                return 0;
-            }
+		end
+             else begin
+                cur_word0 = 0;
+		cur_word0 = 0;
+		cur_word0 = 0;
+		cur_word0 = 0;
+		round_key = {cur_word0, cur_word1, cur_word2, cur_word3};
+		end
+            
         end
 endmodule 
     

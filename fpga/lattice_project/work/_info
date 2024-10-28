@@ -11,7 +11,7 @@ cModel Technology
 dC:/lscc/radiant/3.2/modeltech/win32loem
 vadd_round_key
 Z0 DXx6 sv_std 3 std 0 22 VYECXdT12H8WgbUP_5Y6:3
-Z1 !s110 1730085281
+Z1 !s110 1730092035
 !i10b 1
 !s100 KaFV5^6zVTOhfe7BT@iKm1
 I4In5b982S`AVSgjHY`Y0S2
@@ -20,20 +20,45 @@ Z2 dC:/Users/tkaufman/lab7/e155_lab7/fpga/lattice_project
 w1730084877
 8C:/Users/tkaufman/lab7/e155_lab7/fpga/src/add_round_key.sv
 FC:/Users/tkaufman/lab7/e155_lab7/fpga/src/add_round_key.sv
-!i122 9
+!i122 161
 Z3 L0 6 6
 Z4 VDg1SIo80bB@j0V0VzS_@n1
 Z5 OT;L;2021.4;73
 r1
 !s85 0
 31
-Z6 !s108 1730085281.000000
+Z6 !s108 1730092035.000000
 !s107 C:/Users/tkaufman/lab7/e155_lab7/fpga/src/add_round_key.sv|
 !s90 -reportprogress|300|-work|work|-sv|-stats=none|C:/Users/tkaufman/lab7/e155_lab7/fpga/src/add_round_key.sv|
 !s101 -O0
 !i113 1
 Z7 o-work work -sv -O0
 Z8 tCvgOpt 0
+vkey_expansion
+R0
+R1
+!i10b 1
+!s100 74?F0R?AAReBDYV^mam:P3
+I>Yjb4QL9A;8K9;9PFkPT60
+S1
+R2
+w1730089661
+8C:/Users/tkaufman/lab7/e155_lab7/fpga/src/key_expansion.sv
+FC:/Users/tkaufman/lab7/e155_lab7/fpga/src/key_expansion.sv
+!i122 162
+L0 5 122
+R4
+R5
+r1
+!s85 0
+31
+R6
+!s107 C:/Users/tkaufman/lab7/e155_lab7/fpga/src/key_expansion.sv|
+!s90 -reportprogress|300|-work|work|-sv|-stats=none|C:/Users/tkaufman/lab7/e155_lab7/fpga/src/key_expansion.sv|
+!s101 -O0
+!i113 1
+R7
+R8
 vmixcolumn
 R0
 R1
@@ -45,7 +70,7 @@ R2
 Z9 w1730084603
 8C:/Users/tkaufman/lab7/e155_lab7/fpga/src/mix_column.sv
 FC:/Users/tkaufman/lab7/e155_lab7/fpga/src/mix_column.sv
-!i122 10
+!i122 163
 L0 8 19
 R4
 R5
@@ -71,7 +96,7 @@ R2
 R9
 8C:/Users/tkaufman/lab7/e155_lab7/fpga/src/mix_columns.sv
 FC:/Users/tkaufman/lab7/e155_lab7/fpga/src/mix_columns.sv
-!i122 11
+!i122 164
 L0 8 8
 R4
 R5
@@ -96,7 +121,7 @@ R2
 R9
 8C:/Users/tkaufman/lab7/e155_lab7/fpga/src/rot_word.sv
 FC:/Users/tkaufman/lab7/e155_lab7/fpga/src/rot_word.sv
-!i122 12
+!i122 165
 R3
 R4
 R5
@@ -122,7 +147,7 @@ R2
 R9
 8C:/Users/tkaufman/lab7/e155_lab7/fpga/src/sbox_sync.sv
 FC:/Users/tkaufman/lab7/e155_lab7/fpga/src/sbox_sync.sv
-!i122 13
+!i122 166
 L0 7 16
 R4
 R5
@@ -132,6 +157,106 @@ r1
 R6
 !s107 C:/Users/tkaufman/lab7/e155_lab7/fpga/src/sbox_sync.sv|
 !s90 -reportprogress|300|-work|work|-sv|-stats=none|C:/Users/tkaufman/lab7/e155_lab7/fpga/src/sbox_sync.sv|
+!s101 -O0
+!i113 1
+R7
+R8
+vshift_rows
+R0
+R1
+!i10b 1
+!s100 IE0TK3cZ=ZoO[TNMi7Pl:1
+I3fTi:ZDzZCYb_LkCO=Y5_1
+S1
+R2
+w1730086156
+8C:/Users/tkaufman/lab7/e155_lab7/fpga/src/shift_rows.sv
+FC:/Users/tkaufman/lab7/e155_lab7/fpga/src/shift_rows.sv
+!i122 167
+L0 6 28
+R4
+R5
+r1
+!s85 0
+31
+R6
+!s107 C:/Users/tkaufman/lab7/e155_lab7/fpga/src/shift_rows.sv|
+!s90 -reportprogress|300|-work|work|-sv|-stats=none|C:/Users/tkaufman/lab7/e155_lab7/fpga/src/shift_rows.sv|
+!s101 -O0
+!i113 1
+R7
+R8
+vshift_rows_tb
+R0
+R1
+!i10b 1
+!s100 oGmD5_O2Hz<7a3F_T8?5k3
+I354ZA@K:fDh1@D;?ZMn_`0
+S1
+R2
+w1730088841
+8C:/Users/tkaufman/lab7/e155_lab7/fpga/tb/shift_rows_tb.sv
+FC:/Users/tkaufman/lab7/e155_lab7/fpga/tb/shift_rows_tb.sv
+!i122 169
+L0 8 11
+R4
+R5
+r1
+!s85 0
+31
+R6
+!s107 C:/Users/tkaufman/lab7/e155_lab7/fpga/tb/shift_rows_tb.sv|
+!s90 -reportprogress|300|-work|work|-sv|-stats=none|C:/Users/tkaufman/lab7/e155_lab7/fpga/tb/shift_rows_tb.sv|
+!s101 -O0
+!i113 1
+R7
+R8
+vsub_bytes
+R0
+R1
+!i10b 1
+!s100 ?iCO^b3>2iR;bf?Ng9n7d1
+IhEVQ=]IPIg:P2ETMUQLg82
+S1
+R2
+w1730092023
+8C:/Users/tkaufman/lab7/e155_lab7/fpga/src/sub_bytes.sv
+FC:/Users/tkaufman/lab7/e155_lab7/fpga/src/sub_bytes.sv
+!i122 168
+L0 7 30
+R4
+R5
+r1
+!s85 0
+31
+R6
+!s107 C:/Users/tkaufman/lab7/e155_lab7/fpga/src/sub_bytes.sv|
+!s90 -reportprogress|300|-work|work|-sv|-stats=none|C:/Users/tkaufman/lab7/e155_lab7/fpga/src/sub_bytes.sv|
+!s101 -O0
+!i113 1
+R7
+R8
+vsub_bytes_tb
+R0
+R1
+!i10b 1
+!s100 1WJ]3SdM8^90BDKoU1;VH2
+IBzi`aD1bQamQPAnFo1Lz60
+S1
+R2
+w1730090581
+8C:/Users/tkaufman/lab7/e155_lab7/fpga/tb/sub_bytes_tb.sv
+FC:/Users/tkaufman/lab7/e155_lab7/fpga/tb/sub_bytes_tb.sv
+!i122 170
+L0 8 15
+R4
+R5
+r1
+!s85 0
+31
+R6
+!s107 C:/Users/tkaufman/lab7/e155_lab7/fpga/tb/sub_bytes_tb.sv|
+!s90 -reportprogress|300|-work|work|-sv|-stats=none|C:/Users/tkaufman/lab7/e155_lab7/fpga/tb/sub_bytes_tb.sv|
 !s101 -O0
 !i113 1
 R7
