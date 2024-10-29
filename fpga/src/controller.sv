@@ -14,7 +14,8 @@ module controller(input logic clk, rst,
                   output logic buffer_en,        // Will enable this flip flop to account for latency after every round...Extra: sub_byte_en,
                   output logic [127:0] prev_key, 
                   output logic start_flag,
-                  output logic cyphertext_en);       // enable signal to let ciphertext propogate through final DFF
+                  output logic cyphertext_en,
+                  output logic [3:0] round_count);       // enable signal to let ciphertext propogate through final DFF
 
     typedef enum logic [3:0] {start = 4'd0, round1 = 4'd1, round2 = 4'd2, round3 = 4'd3, round4 = 4'd4, round5 = 4'd5, round6 = 4'd6, round7 = 4'd7, round8 = 4'd8, round9 = 4'd9, finish = 4'd10}statetype;
     statetype next_state, current_state;
@@ -24,19 +25,21 @@ module controller(input logic clk, rst,
     // sub_byte_en -> EN signal placed on DFF within sub_byte to take the 1 clock cycle latency from BRAM data transfer
     // mixed_Data_en -> EN signal placed on DFF to create a buffer between outputs and inputs
 
-    //logic [3:0] round_cnt;  // keeps track of the number of rounds; round = 0 -> start; round = 10 -> finish;
+    logic [3:0] round_cnt;  // keeps track of the number of rounds; round = 0 -> start; round = 10 -> finish;
     logic [3:0] buffer_cnt; // enable signal that is set only after a certain number of clock cycles. this accounts for the clock cycles eaten up by sbox instantiations
     logic [5:0] cypher_cnt;
     // Build simple counter for keeping track of the current round
     always_ff@(posedge clk)
         if (rst) begin
-		buffer_cnt <= 1'b0;
-		cypher_cnt <= 1'b0;
+		buffer_cnt <= 4'b0;
+		cypher_cnt <= 5'b0;
+       		round_cnt <= 4'b0;
 		end
 	else if (current_state == finish)
             begin
-            buffer_cnt <= 1'b0;
-            cypher_cnt <= 1'b0;
+            buffer_cnt <= 4'b0;
+            cypher_cnt <= 5'b0;
+            round_cnt <= 4'b0;
             end
          else 
             begin
@@ -46,6 +49,7 @@ module controller(input logic clk, rst,
             if (buffer_cnt == 'd3) begin // maybe 4?
                 buffer_cnt <= 1'b0;
                 current_state <= next_state;
+                round_cnt <= round_cnt + 1;
             end
             if (cypher_cnt == 'd44)
                 cypher_cnt <= 1'b0;
@@ -96,21 +100,23 @@ module controller(input logic clk, rst,
         always_comb
             begin
                 if (current_state == start)begin 
-                    input_data_mux = 1'b0;       // let plaintext through
+                    input_data_mux = 1'b0;       // let altered plaintext through
                     mix_columns_flag = 1'b0;     // allow mix_columns to manipulate data
                     buffer_en = (buffer_cnt == 'd3) ?  1'b1 : 1'b0;
                     prev_key = current_key;
                     start_flag = 1'b1;
                     cyphertext_en = 0; //(cypher_cnt == 'd22) ? 0b1 : 0b0;
+                    round_count = round_cnt;
                 end
 
                 if (current_state == round1 | current_state == round2 | current_state == round3 | current_state == round4 | current_state == round5 | current_state == round6 | current_state == round7 | current_state == round8 | current_state == round9) begin
-                    input_data_mux = 1'b1;       // let cyphertext through
+                    input_data_mux = 1'b1;       // ...let unfinished_cyphertext through
                     mix_columns_flag = 1'b0;     // allow mix_columns to manipulate data
                     buffer_en = (buffer_cnt == 'd3) ?  1'b1 : 1'b0;
                     prev_key = current_key;
                     start_flag = 1'b0;
                     cyphertext_en = 1'b0; //(cypher_cnt == 'd22) ? 0b1 : 0b0;
+                    round_count = round_cnt;
                 end
                 if (current_state == finish) begin
                     input_data_mux = 1'b1;       // let cyphertext through
@@ -119,6 +125,7 @@ module controller(input logic clk, rst,
                     prev_key = current_key;
                     start_flag = 1'b0;
                     cyphertext_en = (cypher_cnt == 'd44) ? 1'b1 : 1'b0;
+                    round_count = round_cnt; 
                 end
             end
         

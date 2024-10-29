@@ -33,13 +33,6 @@ Model Technology ModelSim - Lattice FPGA Edition vlog 2021.4 Compiler 2021.10 Oc
 Top level modules:
 	rot_word
 
-} {} {}} C:/Users/tkaufman/lab7/e155_lab7/fpga/src/add_round_key.sv {1 {vlog -work work -sv -stats=none C:/Users/tkaufman/lab7/e155_lab7/fpga/src/add_round_key.sv
-Model Technology ModelSim - Lattice FPGA Edition vlog 2021.4 Compiler 2021.10 Oct 14 2021
--- Compiling module add_round_key
-
-Top level modules:
-	add_round_key
-
 } {} {}} C:/Users/tkaufman/lab7/e155_lab7/fpga/src/mix_column.sv {1 {vlog -work work -sv -stats=none C:/Users/tkaufman/lab7/e155_lab7/fpga/src/mix_column.sv
 Model Technology ModelSim - Lattice FPGA Edition vlog 2021.4 Compiler 2021.10 Oct 14 2021
 -- Compiling module mixcolumn
@@ -61,6 +54,13 @@ Model Technology ModelSim - Lattice FPGA Edition vlog 2021.4 Compiler 2021.10 Oc
 Top level modules:
 	mixcolumns
 
+} {} {}} C:/Users/tkaufman/lab7/e155_lab7/fpga/src/sub_bytes.sv {1 {vlog -work work -sv -stats=none C:/Users/tkaufman/lab7/e155_lab7/fpga/src/sub_bytes.sv
+Model Technology ModelSim - Lattice FPGA Edition vlog 2021.4 Compiler 2021.10 Oct 14 2021
+-- Compiling module sub_bytes
+
+Top level modules:
+	sub_bytes
+
 } {} {}} C:/Users/tkaufman/lab7/e155_lab7/fpga/src/sbox_sync.sv {1 {vlog -work work -sv -stats=none C:/Users/tkaufman/lab7/e155_lab7/fpga/src/sbox_sync.sv
 Model Technology ModelSim - Lattice FPGA Edition vlog 2021.4 Compiler 2021.10 Oct 14 2021
 -- Compiling module sbox_sync
@@ -74,12 +74,5 @@ Model Technology ModelSim - Lattice FPGA Edition vlog 2021.4 Compiler 2021.10 Oc
 
 Top level modules:
 	shift_rows
-
-} {} {}} C:/Users/tkaufman/lab7/e155_lab7/fpga/src/sub_bytes.sv {1 {vlog -work work -sv -stats=none C:/Users/tkaufman/lab7/e155_lab7/fpga/src/sub_bytes.sv
-Model Technology ModelSim - Lattice FPGA Edition vlog 2021.4 Compiler 2021.10 Oct 14 2021
--- Compiling module sub_bytes
-
-Top level modules:
-	sub_bytes
 
 } {} {}}

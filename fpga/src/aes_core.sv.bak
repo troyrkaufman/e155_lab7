@@ -44,7 +44,7 @@ module aes_core(input  logic         clk,
 
     shift_rows sr(new_state_SB, new_state_SR);
 
-    mixcolumns mc(new_state_SR, new_state_MC);
+    mix_columns mc(new_state_SR, new_state_MC);
 
     controller con(clk, load, round_key, input_round_select, mix_columns_select, buffer_en, prev_key, start_flag, cyphertext_en, round_count);
 
