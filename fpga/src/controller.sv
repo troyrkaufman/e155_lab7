@@ -7,12 +7,13 @@
     FSM: 
 */
 
-module controller(input logic clk, nrst, DO WE NEED A RESET? TB DOESN'T HAVE ONE
+module controller(input logic clk, 
                   input logic [127:0] current_key,   // received from key_expansion
                   output logic input_data_mux,       // selects whether new input data is selected or previous ciphertext
                   output logic mix_columns_flag,     // Flag that will allow data to have their columns mixed or not base on conditional
-                  output logic mixed_data_en,        // Will enable this flip flop to account for latency after every round...Extra: sub_byte_en,
-                  output logic [127:0] prev_key);
+                  output logic buffer_en,        // Will enable this flip flop to account for latency after every round...Extra: sub_byte_en,
+                  output logic [127:0] prev_key, 
+                  output logic cyphertext_en);       // enable signal to let ciphertext propogate through final DFF
 
     typdef logic enum [3:0] {start = 0d0, round1 = 0d1, round2 = 0d2, round3 = 0d3, round4 = 0d4, round5 = 0d5, round6 = 0d6, round7 = 0d7, round8 = 0d8, round9 = 0d9, finish = 0d10}statetype;
     statetype next_state, current_state;
@@ -22,39 +23,162 @@ module controller(input logic clk, nrst, DO WE NEED A RESET? TB DOESN'T HAVE ONE
     // sub_byte_en -> EN signal placed on DFF within sub_byte to take the 1 clock cycle latency from BRAM data transfer
     // mixed_Data_en -> EN signal placed on DFF to create a buffer between outputs and inputs
 
-    logic [3:0] round_cnt;  // keeps track of the number of rounds; round = 0 -> start; round = 10 -> finish;
+    //logic [3:0] round_cnt;  // keeps track of the number of rounds; round = 0 -> start; round = 10 -> finish;
     logic [3:0] buffer_cnt; // enable signal that is set only after a certain number of clock cycles. this accounts for the clock cycles eaten up by sbox instantiations
-    
+    logic [4:0] cypher_cnt;
     // Build simple counter for keeping track of the current round
     always_ff@(posedge clk){
-        if (~nrst) {
+       /* if (~nrst) {
             begin
-            round_cnt <= 0;
             prev_key <= 0;
             buffer_cnt <= 0;
+            current_state <= start;
             end
-        } else if (round_cnt == 4d10){
+        } else */
+        if (finish){
             begin
-            round_cnt <= 0;
-            prev_key <= 0;
+           // prev_key <= 0;
             buffer_cnt <= 0;
+            cypher_cnt <= 0;
+            current_state <= start;
             end
         } else {
             begin
-            prev_key <= current_key;
+           // prev_key <= current_key;
             buffer_cnt <= buffer_cnt + 1;
-            if (buffer_cnt == 4) begin
-                round_cnt <= round_cnt + 1;
+            cypher_cnt <= cypher_cnt + 1;
+            if (buffer_cnt == 'd2) begin // maybe 4?
                 buffer_cnt <= 0;
+                current_state <= next_state;
             end
-            
+            if (cypher_cnt == 'd22)
+                cypher_cnt <= 0;
+                current_state <= next_state;
             end
         }
     }
 
-    // Update control signals on every round
-    
+    always_comb begin
+        case(current_state)
+            start: begin 
+                 next_state = round1;
+                end
+            round1:begin 
+                next_state = round2;
+                end
+            round2: begin 
+                next_state = round3;
+                end
+            round3: begin 
+                next_state = round4;
+                end
+            round4: begin 
+                next_state = round5;
+                end
+            round5: begin 
+                next_state = round6;
+                end
+            round6: begin 
+                next_state = round7;
+                end
+            round7: begin 
+                next_state = round8;
+                end
+            round8: begin 
+                next_state = round9;
+                end
+            round9: begin 
+                next_state = finish;
+                end
+            finish: begin 
+                next_state = start;
+                end
+            default: 
+        endcase
 
+        // Output logic
+        always_comb
+            begin
+                if (current_state == start)begin 
+                    input_data_mux = 0b0;       // let plaintext through
+                    mix_columns_flag = 0b0;     // allow mix_columns to manipulate data
+                    buffer_en = (buffer_cnt == 'd2) ?  0b1 : 0b0;
+                    prev_key = current_key;
+                    cyphertext_en = 0; //(cypher_cnt == 'd22) ? 0b1 : 0b0;
+                end
 
+                if (current_state = round1 | round2 | round3 | round4 | round5 | round6 | round 7 | round8 | round9) begin
+                    input_data_mux = 0b1;       // let cyphertext through
+                    mix_columns_flag = 0b0;     // allow mix_columns to manipulate data
+                    buffer_en = (buffer_cnt == 'd2) ?  0b1 : 0b0;
+                    prev_key = current_key;
+                    cyphertext_en = 0; //(cypher_cnt == 'd22) ? 0b1 : 0b0;
+                end
+                if (current_state == finish) begin
+                    input_data_mux = 0b1;       // let cyphertext through
+                    mix_columns_flag = 0b1;     // allow mix_columns to manipulate data
+                    buffer_en = (buffer_cnt == 'd2) ?  0b1 : 0b0;
+                    prev_key = current_key;
+                    cyphertext_en = (cypher_cnt == 'd22) ? 0b1 : 0b0;
+                end
+            end
+        
+    end
 
 endmodule
+
+
+
+
+
+/*
+    // Next state logic
+    always_comb begin
+        case(current_state)
+            start: begin 
+                if(round_cnt == 'd1) next_state = round1;
+                else next_state = current_state;
+            end
+            round1:begin 
+                if(round_cnt == 'd2) next_state = round2;
+                else next_state = current_state;
+                end
+            round2: begin 
+                if(round_cnt == 'd3) next_state = round3;
+                else next_state = current_state;
+                end
+            round3: begin 
+                if(round_cnt == 'd4) next_state = round4;
+                else next_state = current_state;
+                end
+            round4: begin 
+                if(round_cnt == 'd5) next_state = round5;
+                else next_state = current_state;
+                end
+            round5: begin 
+                if(round_cnt == 'd6) next_state = round6;
+                else next_state = current_state;
+                end
+            round6: begin 
+                if(round_cnt == 'd7) next_state = round7;
+                else next_state = current_state;
+                end
+            round7: begin 
+                if(round_cnt == 'd8) next_state = round8;
+                else next_state = current_state;
+                end
+            round8: begin 
+                if(round_cnt == 'd9) next_state = round9;
+                else next_state = current_state;
+                end
+            round9: begin 
+                if(round_cnt == 'd10) next_state = finish;
+                else next_state = current_state;
+                end
+            finish: begin 
+                if(round_cnt == 'd0) next_state = start;
+                else next_state = current_state;
+                end
+            default: 
+        endcase
+        */

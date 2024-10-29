@@ -46,10 +46,6 @@ module key_expansion(input logic clk,
             if (round == 4'd0) 
                 round_key = key;
              else if (round == 4'd1) begin
-                /*cur_word0 = prev_word3 ^ prev_word0 ^ rcon;
-                cur_word1 = cur_word0 ^ prev_word1;
-                cur_word2 = cur_word1 ^ prev_word2;
-                cur_word3 = cur_word2 ^ prev_word3; */
 		cur_word0 = prev_word3 ^ prev_key[127:96] ^ rcon;
                 cur_word1 = cur_word0 ^ prev_key[95:64];
                 cur_word2 = cur_word1 ^ prev_key[63:32];
