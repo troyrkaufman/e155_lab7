@@ -38,17 +38,17 @@ module aes_core(input  logic         clk,
     logic [127:0] unfinished_cyphertext, cyphertext_output;
 
     // TODO: Your code goes here
-    add_round_key ark(input_data_ARK, key, round_key, start_flag, new_state_ARK);
+    add_round_key addRoundKey(input_data_ARK, key, round_key, start_flag, new_state_ARK);
 
-    sub_bytes sb(clk, input_data_SB, new_state_SB);
+    sub_bytes subBytes(clk, input_data_SB, new_state_SB);
 
-    shift_rows sr(new_state_SB, new_state_SR);
+    shift_rows shiftRows(new_state_SB, new_state_SR);
 
-    mixcolumns mc(new_state_SR, new_state_MC);
+    mixcolumns mixColumn(new_state_SR, new_state_MC);
 
     controller con(clk, load, round_key, input_round_select, mix_columns_select, buffer_en, prev_key, start_flag, cyphertext_en, round_count);
 
-    key_expansion ke(clk, round_count, key, prev_key, round_key);
+    key_expansion keyExpansion(clk, round_count, key, prev_key, round_key);
     
     // if statement for DFF buffer between output and input
     always_ff@(posedge clk)begin

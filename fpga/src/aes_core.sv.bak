@@ -38,17 +38,17 @@ module aes_core(input  logic         clk,
     logic [127:0] unfinished_cyphertext, cyphertext_output;
 
     // TODO: Your code goes here
-    add_round_key ark(input_data_ARK, key, round_key, start_flag, new_state_ARK);
+    add_round_key addRoundKey(input_data_ARK, key, round_key, start_flag, new_state_ARK);
 
-    sub_bytes sb(clk, input_data_SB, new_state_SB);
+    sub_bytes subBytes(clk, input_data_SB, new_state_SB);
 
-    shift_rows sr(new_state_SB, new_state_SR);
+    shift_rows shiftRows(new_state_SB, new_state_SR);
 
-    mix_columns mc(new_state_SR, new_state_MC);
+    mixcolumns mixColumn(new_state_SR, new_state_MC);
 
     controller con(clk, load, round_key, input_round_select, mix_columns_select, buffer_en, prev_key, start_flag, cyphertext_en, round_count);
 
-    key_expansion ke(clk, round_count, key, prev_key, round_key);
+    key_expansion keyExpansion(clk, round_count, key, prev_key, round_key);
     
     // if statement for DFF buffer between output and input
     always_ff@(posedge clk)begin
@@ -59,7 +59,7 @@ module aes_core(input  logic         clk,
 	end
 
     // mux for controlling plaintext or mixed_data input into add_round_key
-    assign input_data_ARK = (start_flag == 1'b1) ? plaintext: (mix_columns_select == 1'b0) ? new_state_SR : new_state_MC;
+    assign input_data_ARK = (start_flag == 1'b0) ? plaintext: (mix_columns_select == 1'b0) ? new_state_SR : new_state_MC;
     
     // mux for input to sub_byte
     assign input_data_SB = (input_round_select == 1'b1) ? unfinished_cyphertext : new_state_ARK;
