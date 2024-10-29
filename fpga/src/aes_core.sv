@@ -25,7 +25,7 @@ module aes_core(input  logic         clk,
                 output logic [127:0] cyphertext);
 
     // TODO: Your code goes here
-
+    
     // if statement to force data through mix_columns or bypassing it
 
     // if statement for DFF buffer between output and input
