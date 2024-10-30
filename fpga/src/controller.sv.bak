@@ -125,7 +125,7 @@ module controller(input logic clk, rst,
                     buffer_en = (buffer_cnt == 'd1) ?  1'b1 : 1'b0;
                     //prev_key = current_key;
                     start_flag = 1'b0;
-                    cyphertext_en = (cypher_cnt == 'd24) ? 1'b1 : 1'b0;
+                    cyphertext_en = (cypher_cnt == 'd22) ? 1'b1 : 1'b0;
                     round_count = round_cnt; 
                 end
             end

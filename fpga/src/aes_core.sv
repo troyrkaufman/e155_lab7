@@ -59,7 +59,7 @@ module aes_core(input  logic         clk,
 	end
 
     // mux for controlling plaintext or mixed_data input into add_round_key
-    assign input_data_ARK = (start_flag == 1'b1) ? plaintext: (mix_columns_select == 1'b0) ? new_state_SR : new_state_MC;
+    assign input_data_ARK = (start_flag == 1'b1) ? plaintext: (mix_columns_select == 1'b1) ? new_state_SR : new_state_MC;
     
     // mux for input to sub_byte
     assign input_data_SB = (input_round_select == 1'b1) ? unfinished_cyphertext : new_state_ARK;

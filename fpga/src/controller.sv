@@ -52,7 +52,7 @@ module controller(input logic clk, rst,
                 current_state <= next_state;
                 round_cnt <= round_cnt + 1;
             end
-            if (cypher_cnt == 'd22)
+            if (cypher_cnt == 'd23)
                 cypher_cnt <= 1'b0;
 		//prev_key <= current_key;
                 //current_state <= next_state;
@@ -125,7 +125,7 @@ module controller(input logic clk, rst,
                     buffer_en = (buffer_cnt == 'd1) ?  1'b1 : 1'b0;
                     //prev_key = current_key;
                     start_flag = 1'b0;
-                    cyphertext_en = (cypher_cnt == 'd22) ? 1'b1 : 1'b0;
+                    cyphertext_en = (cypher_cnt == 'd23) ? 1'b1 : 1'b0;
                     round_count = round_cnt; 
                 end
             end
