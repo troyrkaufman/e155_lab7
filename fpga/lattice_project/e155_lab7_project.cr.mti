@@ -1,11 +1,4 @@
-C:/Users/tkaufman/lab7/e155_lab7/fpga/src/aes_core.sv {1 {vlog -work work -sv -stats=none C:/Users/tkaufman/lab7/e155_lab7/fpga/src/aes_core.sv
-Model Technology ModelSim - Lattice FPGA Edition vlog 2021.4 Compiler 2021.10 Oct 14 2021
--- Compiling module aes_core
-
-Top level modules:
-	aes_core
-
-} {} {}} C:/Users/tkaufman/lab7/e155_lab7/fpga/tb/shift_rows_tb.sv {1 {vlog -work work -sv -stats=none C:/Users/tkaufman/lab7/e155_lab7/fpga/tb/shift_rows_tb.sv
+C:/Users/tkaufman/lab7/e155_lab7/fpga/tb/shift_rows_tb.sv {1 {vlog -work work -sv -stats=none C:/Users/tkaufman/lab7/e155_lab7/fpga/tb/shift_rows_tb.sv
 Model Technology ModelSim - Lattice FPGA Edition vlog 2021.4 Compiler 2021.10 Oct 14 2021
 -- Compiling module shift_rows_tb
 
@@ -89,12 +82,12 @@ Model Technology ModelSim - Lattice FPGA Edition vlog 2021.4 Compiler 2021.10 Oc
 Top level modules:
 	mixcolumns
 
-} {} {}} C:/Users/tkaufman/lab7/e155_lab7/fpga/src/shift_rows.sv {1 {vlog -work work -sv -stats=none C:/Users/tkaufman/lab7/e155_lab7/fpga/src/shift_rows.sv
+} {} {}} C:/Users/tkaufman/lab7/e155_lab7/fpga/src/sub_bytes.sv {1 {vlog -work work -sv -stats=none C:/Users/tkaufman/lab7/e155_lab7/fpga/src/sub_bytes.sv
 Model Technology ModelSim - Lattice FPGA Edition vlog 2021.4 Compiler 2021.10 Oct 14 2021
--- Compiling module shift_rows
+-- Compiling module sub_bytes
 
 Top level modules:
-	shift_rows
+	sub_bytes
 
 } {} {}} C:/Users/tkaufman/lab7/e155_lab7/fpga/src/sbox_sync.sv {1 {vlog -work work -sv -stats=none C:/Users/tkaufman/lab7/e155_lab7/fpga/src/sbox_sync.sv
 Model Technology ModelSim - Lattice FPGA Edition vlog 2021.4 Compiler 2021.10 Oct 14 2021
@@ -103,11 +96,11 @@ Model Technology ModelSim - Lattice FPGA Edition vlog 2021.4 Compiler 2021.10 Oc
 Top level modules:
 	sbox_sync
 
-} {} {}} C:/Users/tkaufman/lab7/e155_lab7/fpga/src/sub_bytes.sv {1 {vlog -work work -sv -stats=none C:/Users/tkaufman/lab7/e155_lab7/fpga/src/sub_bytes.sv
+} {} {}} C:/Users/tkaufman/lab7/e155_lab7/fpga/src/shift_rows.sv {1 {vlog -work work -sv -stats=none C:/Users/tkaufman/lab7/e155_lab7/fpga/src/shift_rows.sv
 Model Technology ModelSim - Lattice FPGA Edition vlog 2021.4 Compiler 2021.10 Oct 14 2021
--- Compiling module sub_bytes
+-- Compiling module shift_rows
 
 Top level modules:
-	sub_bytes
+	shift_rows
 
 } {} {}}

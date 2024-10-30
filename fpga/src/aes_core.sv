@@ -53,9 +53,9 @@ module aes_core(input  logic         clk,
     // if statement for DFF buffer between output and input
     always_ff@(posedge clk)begin
         if (buffer_en)
-            unfinished_cyphertext <= cyphertext_output;
+            unfinished_cyphertext <= new_state_ARK;
         if (cyphertext_en)
-            cyphertext <= cyphertext_output;
+            cyphertext <= new_state_ARK;
 	end
 
     // mux for controlling plaintext or mixed_data input into add_round_key

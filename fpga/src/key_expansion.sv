@@ -32,11 +32,11 @@ module key_expansion(input logic clk,
     // Calculate round constant
     always_comb
         begin
-            if (round <= 4'd8)
+            if (round <= 4'd9)
                 rcon = (32'h01000000 << round - 2);
-              else if (round == 4'd9) 
+              else if (round == 4'd10) 
                 rcon = 32'h1b000000;
-              else if (round == 4'd10)
+              else if (round == 4'd11)
                 rcon = 32'h36000000;
         end
     
