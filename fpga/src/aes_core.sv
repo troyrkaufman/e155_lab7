@@ -37,6 +37,9 @@ module aes_core(input  logic         clk,
 
     logic [127:0] unfinished_cyphertext, cyphertext_output;
 
+    logic [1:0] counter_done; 
+	logic first, second, third, fourth;
+
     // TODO: Your code goes here
     add_round_key addRoundKey(input_data_ARK, key, round_key, start_flag, new_state_ARK);
 
@@ -46,18 +49,25 @@ module aes_core(input  logic         clk,
 
     mixcolumns mixColumn(new_state_SR, new_state_MC);
 
-    controller con(clk, load, round_key, input_round_select, mix_columns_select, buffer_en, prev_key, start_flag, cyphertext_en, round_count);
+    controller con(clk, load, round_key, input_round_select, mix_columns_select, buffer_en, prev_key, start_flag, cyphertext_en, round_count, control_done);
 
     key_expansion keyExpansion(clk, round_count, key, prev_key, round_key);
     
     // if statement for DFF buffer between output and input
     always_ff@(posedge clk)begin
+	if (load) counter_done <= 0;
         if (buffer_en)
             unfinished_cyphertext <= new_state_ARK;
-        if (cyphertext_en)
+        if (cyphertext_en) begin
             cyphertext <= new_state_ARK;
+	    //counter_done <= counter_done + 1;
+		//end 
+	//else begin
+		//cyphertext <= 0;
+		//done <= 0;
 	end
-
+	end
+    assign done = (control_done) ? 1 : 0;
     // mux for controlling plaintext or mixed_data input into add_round_key
     assign input_data_ARK = (start_flag == 1'b1) ? plaintext: (mix_columns_select == 1'b1) ? new_state_SR : new_state_MC;
     

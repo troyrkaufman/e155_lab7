@@ -19,12 +19,12 @@ Model Technology ModelSim - Lattice FPGA Edition vlog 2021.4 Compiler 2021.10 Oc
 Top level modules:
 	sub_bytes_tb
 
-} {} {}} C:/Users/tkaufman/lab7/e155_lab7/fpga/src/controller.sv {1 {vlog -work work -sv -stats=none C:/Users/tkaufman/lab7/e155_lab7/fpga/src/controller.sv
+} {} {}} C:/Users/tkaufman/lab7/e155_lab7/fpga/src/aes_spi.sv {1 {vlog -work work -sv -stats=none C:/Users/tkaufman/lab7/e155_lab7/fpga/src/aes_spi.sv
 Model Technology ModelSim - Lattice FPGA Edition vlog 2021.4 Compiler 2021.10 Oct 14 2021
--- Compiling module controller
+-- Compiling module aes_spi
 
 Top level modules:
-	controller
+	aes_spi
 
 } {} {}} C:/Users/tkaufman/lab7/e155_lab7/fpga/src/gaoismult.sv {1 {vlog -work work -sv -stats=none C:/Users/tkaufman/lab7/e155_lab7/fpga/src/gaoismult.sv
 Model Technology ModelSim - Lattice FPGA Edition vlog 2021.4 Compiler 2021.10 Oct 14 2021
@@ -32,6 +32,13 @@ Model Technology ModelSim - Lattice FPGA Edition vlog 2021.4 Compiler 2021.10 Oc
 
 Top level modules:
 	galoismult
+
+} {} {}} C:/Users/tkaufman/lab7/e155_lab7/fpga/tb/aes_spi_tb.sv {1 {vlog -work work -sv -stats=none C:/Users/tkaufman/lab7/e155_lab7/fpga/tb/aes_spi_tb.sv
+Model Technology ModelSim - Lattice FPGA Edition vlog 2021.4 Compiler 2021.10 Oct 14 2021
+-- Compiling module aes_spi_tb
+
+Top level modules:
+	aes_spi_tb
 
 } {} {}} C:/Users/tkaufman/lab7/e155_lab7/fpga/tb/controller_tb.sv {1 {vlog -work work -sv -stats=none C:/Users/tkaufman/lab7/e155_lab7/fpga/tb/controller_tb.sv
 Model Technology ModelSim - Lattice FPGA Edition vlog 2021.4 Compiler 2021.10 Oct 14 2021
@@ -61,12 +68,26 @@ Model Technology ModelSim - Lattice FPGA Edition vlog 2021.4 Compiler 2021.10 Oc
 Top level modules:
 	add_round_key
 
+} {} {}} C:/Users/tkaufman/lab7/e155_lab7/fpga/src/aes.sv {1 {vlog -work work -sv -stats=none C:/Users/tkaufman/lab7/e155_lab7/fpga/src/aes.sv
+Model Technology ModelSim - Lattice FPGA Edition vlog 2021.4 Compiler 2021.10 Oct 14 2021
+-- Compiling module aes
+
+Top level modules:
+	aes
+
 } {} {}} C:/Users/tkaufman/lab7/e155_lab7/fpga/src/mix_column.sv {1 {vlog -work work -sv -stats=none C:/Users/tkaufman/lab7/e155_lab7/fpga/src/mix_column.sv
 Model Technology ModelSim - Lattice FPGA Edition vlog 2021.4 Compiler 2021.10 Oct 14 2021
 -- Compiling module mixcolumn
 
 Top level modules:
 	mixcolumn
+
+} {} {}} C:/Users/tkaufman/lab7/e155_lab7/fpga/tb/aes_core_tb.sv {1 {vlog -work work -sv -stats=none C:/Users/tkaufman/lab7/e155_lab7/fpga/tb/aes_core_tb.sv
+Model Technology ModelSim - Lattice FPGA Edition vlog 2021.4 Compiler 2021.10 Oct 14 2021
+-- Compiling module aes_core_tb
+
+Top level modules:
+	aes_core_tb
 
 } {} {}} C:/Users/tkaufman/lab7/e155_lab7/fpga/src/key_expansion.sv {1 {vlog -work work -sv -stats=none C:/Users/tkaufman/lab7/e155_lab7/fpga/src/key_expansion.sv
 Model Technology ModelSim - Lattice FPGA Edition vlog 2021.4 Compiler 2021.10 Oct 14 2021
