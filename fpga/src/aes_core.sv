@@ -49,13 +49,13 @@ module aes_core(input  logic         clk,
 
     mixcolumns mixColumn(new_state_SR, new_state_MC);
 
-    controller con(clk, load, round_key, input_round_select, mix_columns_select, buffer_en, prev_key, start_flag, cyphertext_en, round_count, control_done);
+    controller con(clk, load, round_key, input_round_select, mix_columns_select, buffer_en, prev_key, start_flag, cyphertext_en, round_count, control_done, cypher_flag);
 
     key_expansion keyExpansion(clk, round_count, key, prev_key, round_key);
     
     // if statement for DFF buffer between output and input
     always_ff@(posedge clk)begin
-	if (load) counter_done <= 0;
+	//if (load) counter_done <= 0;
         if (buffer_en)
             unfinished_cyphertext <= new_state_ARK;
         if (cyphertext_en) begin
