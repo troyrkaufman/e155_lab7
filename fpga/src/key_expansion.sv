@@ -33,7 +33,7 @@ module key_expansion(input logic clk,
     always_comb
         begin
             if (round <= 4'd8)
-                rcon = (32'h01000000 << round - 1);
+                rcon = (32'h01000000 << round - 2);
               else if (round == 4'd9) 
                 rcon = 32'h1b000000;
               else if (round == 4'd10)
@@ -43,17 +43,10 @@ module key_expansion(input logic clk,
     always_comb 
         begin 
             // The first 4 words of the expanded key are the key itself
-            if (round == 4'd0) 
+            if (round == 4'd1) 
                 round_key = key;
-             else if (round == 4'd1) begin
-		cur_word0 = prev_word3 ^ prev_key[127:96] ^ rcon;
-                cur_word1 = cur_word0 ^ prev_key[95:64];
-                cur_word2 = cur_word1 ^ prev_key[63:32];
-                cur_word3 = cur_word2 ^ prev_key[31:0];
-                round_key = {cur_word0, cur_word1, cur_word2, cur_word3};
-		end
              else if (round == 4'd2) begin
-                cur_word0 = prev_word3 ^ prev_key[127:96] ^ rcon;
+		cur_word0 = prev_word3 ^ prev_key[127:96] ^ rcon;
                 cur_word1 = cur_word0 ^ prev_key[95:64];
                 cur_word2 = cur_word1 ^ prev_key[63:32];
                 cur_word3 = cur_word2 ^ prev_key[31:0];
@@ -115,11 +108,18 @@ module key_expansion(input logic clk,
                 cur_word3 = cur_word2 ^ prev_key[31:0];
                 round_key = {cur_word0, cur_word1, cur_word2, cur_word3};
 		end
+             else if (round == 4'd11) begin
+                cur_word0 = prev_word3 ^ prev_key[127:96] ^ rcon;
+                cur_word1 = cur_word0 ^ prev_key[95:64];
+                cur_word2 = cur_word1 ^ prev_key[63:32];
+                cur_word3 = cur_word2 ^ prev_key[31:0];
+                round_key = {cur_word0, cur_word1, cur_word2, cur_word3};
+		end
              else begin
                 cur_word0 = 0;
-		cur_word0 = 0;
-		cur_word0 = 0;
-		cur_word0 = 0;
+		cur_word1 = 0;
+		cur_word2 = 0;
+		cur_word3 = 0;
 		round_key = {cur_word0, cur_word1, cur_word2, cur_word3};
 		end
             

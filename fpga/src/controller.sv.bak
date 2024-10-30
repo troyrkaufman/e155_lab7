@@ -33,7 +33,7 @@ module controller(input logic clk, rst,
         if (rst) begin
 		buffer_cnt <= 4'b0;
 		cypher_cnt <= 5'b0;
-       		rount_cnt <= 4'b0;
+       		round_cnt <= 4'b0;
 		end
 	else if (current_state == finish)
             begin
@@ -103,13 +103,14 @@ module controller(input logic clk, rst,
                     input_data_mux = 1'b0;       // let altered plaintext through
                     mix_columns_flag = 1'b0;     // allow mix_columns to manipulate data
                     buffer_en = (buffer_cnt == 'd3) ?  1'b1 : 1'b0;
+		    //buffer_en = 0;
                     prev_key = current_key;
                     start_flag = 1'b1;
                     cyphertext_en = 0; //(cypher_cnt == 'd22) ? 0b1 : 0b0;
                     round_count = round_cnt;
                 end
 
-                if (current_state == round1 | current_state == round2 | current_state == round3 | current_state == round4 | current_state == round5 | current_state == round6 | current_state == round7 | current_state == round8 | current_state == round9) begin
+                else if (current_state == round1 | current_state == round2 | current_state == round3 | current_state == round4 | current_state == round5 | current_state == round6 | current_state == round7 | current_state == round8 | current_state == round9) begin
                     input_data_mux = 1'b1;       // ...let unfinished_cyphertext through
                     mix_columns_flag = 1'b0;     // allow mix_columns to manipulate data
                     buffer_en = (buffer_cnt == 'd3) ?  1'b1 : 1'b0;
@@ -118,7 +119,7 @@ module controller(input logic clk, rst,
                     cyphertext_en = 1'b0; //(cypher_cnt == 'd22) ? 0b1 : 0b0;
                     round_count = round_cnt;
                 end
-                if (current_state == finish) begin
+                else if (current_state == finish) begin
                     input_data_mux = 1'b1;       // let cyphertext through
                     mix_columns_flag = 1'b1;     // allow mix_columns to manipulate data
                     buffer_en = (buffer_cnt == 'd3) ?  1'b1 : 1'b0;
@@ -127,6 +128,15 @@ module controller(input logic clk, rst,
                     cyphertext_en = (cypher_cnt == 'd44) ? 1'b1 : 1'b0;
                     round_count = round_cnt; 
                 end
+		/*else begin
+		    input_data_mux = 1'b0;
+		    mix_columns_flag = 1'b0;
+		    buffer_en = 1'b0;
+		    prev_key = 0;
+		    start_flag = 1'b0;
+	        cyphertext_en = 1'b0;
+		   // round_count = round_cnt;
+		end */
             end
         
 
