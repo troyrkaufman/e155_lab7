@@ -15,7 +15,7 @@ module controller_tb();
     end
 
     initial begin
-	rst = 1; #10; rst = 0; // rst represents when load = '1'
+	rst = 1; #10; rst = 0; //rst represents when load = '1'
         //round = 0; 
         current_key = 128'h2b7e151628aed2a6abf7158809cf4f3c; #5;
         

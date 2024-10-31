@@ -1,3 +1,8 @@
+// Troy Kaufman
+// tkaufman@hmc.edu
+// 10/30/24
+// This is a top level module that creates a cyphertext given a key and plaintext
+
 /////////////////////////////////////////////
 // aes_core
 //   top level AES encryption module
@@ -53,22 +58,18 @@ module aes_core(input  logic         clk,
 
     key_expansion keyExpansion(clk, round_count, key, prev_key, round_key);
     
-    // if statement for DFF buffer between output and input
+    // buffer DFF that's enabled at the end of each round and another buffer for cyphertext output
     always_ff@(posedge clk)begin
-	//if (load) counter_done <= 0;
         if (buffer_en)
             unfinished_cyphertext <= new_state_ARK;
         if (cyphertext_en) begin
             cyphertext <= new_state_ARK;
-	    //counter_done <= counter_done + 1;
-		//end 
-	//else begin
-		//cyphertext <= 0;
-		//done <= 0;
-	end
-	end
+
+	    end
+	    end
     assign done = (control_done) ? 1 : 0;
-    // mux for controlling plaintext or mixed_data input into add_round_key
+
+    // mux for controlling input data into add_round_key
     assign input_data_ARK = (start_flag == 1'b1) ? plaintext: (mix_columns_select == 1'b1) ? new_state_SR : new_state_MC;
     
     // mux for input to sub_byte

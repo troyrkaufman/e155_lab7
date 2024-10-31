@@ -1,6 +1,6 @@
 // Troy Kaufman
 // tkaufman@g.hmc.edu
-// 10/16/24
+// 10/27/24
 // This module creates a key every round 
 module key_expansion(input logic clk,
                      input logic [3:0] round,          // round reset will be handled in controller module

@@ -1,3 +1,8 @@
+// Troy Kaufman
+// tkaufman@hmc.edu
+// 10/30/24
+// This module performs the mix columns operation one word at a time
+
 /////////////////////////////////////////////
 // mixcolumn
 //   Perform Galois field operations on bytes in a column

@@ -1,3 +1,8 @@
+// Troy Kaufman
+// tkaufman@hmc.edu
+// 10/30/24
+// top level module for core and spi modules
+
 /////////////////////////////////////////////
 // aes
 //   Top level module with SPI interface and SPI core

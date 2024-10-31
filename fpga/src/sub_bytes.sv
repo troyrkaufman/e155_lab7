@@ -2,7 +2,6 @@
 // tkaufman@g.hmc.edu
 // 10/16/24
 // This module updates the state with every bytes' corresponding sbox value
-// Make sure that a DFFE is present for this combinational logic
 
 module sub_bytes(input logic clk, //en,
 		         input logic [127:0] state,

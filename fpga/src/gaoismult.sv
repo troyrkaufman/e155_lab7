@@ -1,3 +1,8 @@
+// Troy Kaufman
+// tkaufman@hmc.edu
+// 10/30/24
+// This modules creates the galois multiplication operation
+
 /////////////////////////////////////////////
 // galoismult
 //   Multiply by x in GF(2^8) is a left shift

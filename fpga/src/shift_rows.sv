@@ -1,7 +1,7 @@
 // Troy Kaufman
 // tkaufman@g.hmc.edu
 // 10/16/24
-// This module creates a key every round 
+// This module creates shifts words according to the AES 128 bit spec
 
 module shift_rows(input logic [127:0] state,
                   output logic [127:0] new_state);
