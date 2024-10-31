@@ -22,7 +22,7 @@ module controller(input logic clk, rst,
     statetype next_state, current_state;
 
     // input_data_mux -> mux that decides whether to let plaintext or mixed_data to propogate to the AES implementation
-    // mix_columns_check -> flag that allows data to propagate through mix_columns module or not
+    // mix_columns_flag -> flag that allows data to propagate through mix_columns module or not
     // sub_byte_en -> EN signal placed on DFF within sub_byte to take the 1 clock cycle latency from BRAM data transfer
     // mixed_Data_en -> EN signal placed on DFF to create a buffer between outputs and inputs
 
@@ -30,48 +30,32 @@ module controller(input logic clk, rst,
     logic [3:0] buffer_cnt; // enable signal that is set only after a certain number of clock cycles. this accounts for the clock cycles eaten up by sbox instantiations
     logic [7:0] cypher_cnt;
 	logic [7:0] counter;
-    //logic cypher_flag;
-	//logic [7:0] dsc;
-    // Build simple counter for keeping track of the current round
+
     always_ff@(posedge clk)
         if (rst) begin
-		buffer_cnt <= 4'b0;
-		cypher_cnt <= 5'b0;
-       		round_cnt <= 4'b0;
-		counter <= 6'b0;
-		cypher_flag <= 0;
-		//dsc <= 8'b0;
+            buffer_cnt <= 4'b0;
+            cypher_cnt <= 5'b0;
+            round_cnt <= 4'b0;
+            counter <= 6'b0;
+            cypher_flag <= 0;
 		end
-	//else if (current_state == finish)
-         //   begin
-          //  buffer_cnt <= 4'b0;
-          //  cypher_cnt <= 5'b0;
-          //  round_cnt <= 4'b0;
-	  //  prev_key <= current_key;
-           // end
-         else 
-            begin
+        else begin
             buffer_cnt <= buffer_cnt + 1;
             cypher_cnt <= cypher_cnt + 1;
-            if (buffer_cnt == 'd1) begin // maybe 4?
-		prev_key <= current_key;
+            if (buffer_cnt == 'd1) begin 
+                prev_key <= current_key;
                 buffer_cnt <= 1'b0;
                 current_state <= next_state;
                 round_cnt <= round_cnt + 1;
             end
             if (cypher_cnt >= 'd23)
-		counter <= counter + 1;
-		//round_cnt <= 0;
-		//dsc <= dsc + 1;
-                //cypher_cnt <= 1'b0;
-		//prev_key <= current_key;
-                //current_state <= next_state;
-	   if (cypher_cnt == 'd22)
-		cypher_flag <= 1;
-	   else 
-		cypher_flag <= 0;
+		        counter <= counter + 1;
+	        if (cypher_cnt == 'd22)
+		        cypher_flag <= 1;
+	        else 
+		        cypher_flag <= 0;
 
-            end
+        end
         
     
 
@@ -110,7 +94,6 @@ module controller(input logic clk, rst,
             finish: begin 
                 next_state = finish; //delay;
                 end
-		//delay: next_state = finish;
             default: next_state = start;
         endcase
 
@@ -122,7 +105,7 @@ module controller(input logic clk, rst,
                     mix_columns_flag = 1'b0;     // allow mix_columns to manipulate data
                     buffer_en = (buffer_cnt == 'd1) ?  1'b1 : 1'b0;
                     start_flag = 1'b1;
-                    cyphertext_en = 0; //(cypher_cnt == 'd22) ? 0b1 : 0b0;
+                    cyphertext_en = 0; 
                     round_count = round_cnt;
                 end
 
@@ -130,87 +113,27 @@ module controller(input logic clk, rst,
                     input_data_mux = 1'b1;       // ...let unfinished_cyphertext through
                     mix_columns_flag = 1'b0;     // allow mix_columns to manipulate data
                     buffer_en = (buffer_cnt == 'd1) ?  1'b1 : 1'b0;
-                    //prev_key = current_key;
                     start_flag = 1'b0;
-                    cyphertext_en = 1'b0; //(cypher_cnt == 'd22) ? 0b1 : 0b0;
+                    cyphertext_en = 1'b0; 
                     round_count = round_cnt;
                 end
                 else if (current_state == finish) begin
                     input_data_mux = 1'b1;       // let cyphertext through
                     mix_columns_flag = 1'b1;     // don't allow mix_columns to manipulate data
-		    //if (cypher_cnt <= 35) begin
-                    //buffer_en = (buffer_cnt == 'd1) ?  1'b1 : 1'b0;
-			//end
-		    //else begin
-			buffer_en = 0;
-			//end
-                    //prev_key = current_key;
+
+			        buffer_en = 0;
+
                     start_flag = 1'b0;
                     cyphertext_en = (cypher_cnt == 'd23) ? 1'b1 : 1'b0;
 		    
                     round_count = round_cnt; 
-			//if (counter >= 'd1) control_done = 1; else control_done = 0;
 			
                 end
-		if (counter >= 'd2) control_done = 1; else control_done = 0;
-		// if (cypher_cnt >= 'd19) control_done = 1; else control_done = 0;
-            end
+		        if (counter >= 'd2) control_done = 1; else control_done = 0;
+                end
         
 
 endmodule
 
 
 
-
-
-/*
-    // Next state logic
-    always_comb begin
-        case(current_state)
-            start: begin 
-                if(round_cnt == 'd1) next_state = round1;
-                else next_state = current_state;
-            end
-            round1:begin 
-                if(round_cnt == 'd2) next_state = round2;
-                else next_state = current_state;
-                end
-            round2: begin 
-                if(round_cnt == 'd3) next_state = round3;
-                else next_state = current_state;
-                end
-            round3: begin 
-                if(round_cnt == 'd4) next_state = round4;
-                else next_state = current_state;
-                end
-            round4: begin 
-                if(round_cnt == 'd5) next_state = round5;
-                else next_state = current_state;
-                end
-            round5: begin 
-                if(round_cnt == 'd6) next_state = round6;
-                else next_state = current_state;
-                end
-            round6: begin 
-                if(round_cnt == 'd7) next_state = round7;
-                else next_state = current_state;
-                end
-            round7: begin 
-                if(round_cnt == 'd8) next_state = round8;
-                else next_state = current_state;
-                end
-            round8: begin 
-                if(round_cnt == 'd9) next_state = round9;
-                else next_state = current_state;
-                end
-            round9: begin 
-                if(round_cnt == 'd10) next_state = finish;
-                else next_state = current_state;
-                end
-            finish: begin 
-                if(round_cnt == 'd0) next_state = start;
-                else next_state = current_state;
-                end
-            default: 
-        endcase
-        */
